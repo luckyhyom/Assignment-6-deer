@@ -1,16 +1,15 @@
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
-@Entity("areas")
-export class UserKickboardHistories {
+@Entity("deer_kiciboards")
+export class deerKiciboards {
+    @PrimaryGeneratedColumn({ name: "deer_id", type: "int" })
+    deerId: number;
 
-    @PrimaryGeneratedColumn({ name: "area_id", type: "int" })
+    @Column({ name: "area_id", type: "int", nullable: false })
     areaId: number;
 
-    @Column({ name: "area_bounday", type: "polygon", nullable: false })
-    areaBoundary: string;
-
-    @Column({ name: "area_center", type: "point", nullable: false })
-    areaCenter: number;
+    @Column({ name: "deer_name", type: "char", length: 50, nullable: true })
+    deerName: string;
 
     @CreateDateColumn({ name: "created_at", type: "date", default: Date.now(), nullable: false })
     createdAt: Date;

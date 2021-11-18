@@ -3,12 +3,14 @@ import {
 	Column,
 	CreateDateColumn,
 	Entity,
+	OneToMany,
 	PrimaryColumn,
 	UpdateDateColumn
 } from "typeorm";
+import { UserKickboardHistories } from "./userKickboardHistories.entity";
 
-@Entity("user")
-export class User {
+@Entity("users")
+export class Users {
 	@PrimaryColumn("varchar", { length: 20 })
 	// @ApiProperty({ description: "ID" })
 	user_id!: string;
@@ -18,6 +20,12 @@ export class User {
 
 	@Column("varchar", { length: 200, nullable: false })
 	password!: string;
+
+	@OneToMany(
+		() => UserKickboardHistories,
+		(userKickboardHistories) => userKickboardHistories.user_id
+	)
+	userKickboardHistories?: UserKickboardHistories[];
 
 	@CreateDateColumn()
 	createdAt!: Date;

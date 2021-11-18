@@ -268,6 +268,8 @@ forbidden_area_coords (반납금지구역의 경계를 표시하는 위도, 경�
 
 ### 2) 상세 내용
 
+[데이터베이스 설계](https://github.com/preOnboarding-Team13/Assignment-6-deer/wiki/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%84%A4%EA%B3%84)
+
 <br>
 
 ## 🐾 **API**

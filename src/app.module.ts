@@ -53,7 +53,7 @@ import { RentalPayModule } from "./domain/rentalPay/rentalPay.module";
 				UseKickboardHistories,
 				UserRepository
 			],
-			// synchronize: true,
+			synchronize: true,
 			// synchronize: false,
 			keepConnectionAlive: true
 		}),

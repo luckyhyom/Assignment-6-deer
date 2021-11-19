@@ -5,7 +5,8 @@ import {
 	OneToMany,
 	ManyToOne,
 	PrimaryGeneratedColumn,
-	UpdateDateColumn
+	UpdateDateColumn,
+	JoinColumn
 } from "typeorm";
 import { UseKickboardHistories } from "./useKickboardHistories.entity";
 import { Areas } from "./areas.entity";
@@ -16,6 +17,7 @@ export class DeerKickboards {
 	deer_id!: number;
 
 	@ManyToOne(() => Areas, (area) => area.kickboards)
+	@JoinColumn([{ name: "area_id", referencedColumnName: "area_id" }])
 	area_id!: number;
 
 	@Column("varchar", { length: 50 })

@@ -40,7 +40,7 @@ export class RentalPayService {
 		let isPunished = false;
 
 		//   주차 금지 구역
-		const forbiddenAreaId = this.forbiddenAreaZoneRepository.findForbiddenArea(use_end_lat, use_end_lng); // forbidden_area_id
+		const forbiddenAreaId = await this.forbiddenAreaZoneRepository.findForbiddenArea(use_end_lat, use_end_lng); // forbidden_area_id
 		if(forbiddenAreaId) {
 			pay += 6000;
 			isPunished = true;
@@ -64,8 +64,8 @@ export class RentalPayService {
 		if (new Date(use_start_at).getTime() - new Date(latestHistoryOfUser.use_end_at).getTime() < 30*60*1000) {
 			pay -= policy.base_payment;
 		}
-		//   파킹존 반납 (30%)
-		const parkingZoneId = this.parkingZoneRepository.findParkingZone(use_end_lat, use_end_lng);
+		// 파킹존 반납 (30%)
+		const parkingZoneId = await this.parkingZoneRepository.findParkingZone(use_end_lat, use_end_lng);
 		if (parkingZoneId) {
 			pay *= 0.7;
 		}

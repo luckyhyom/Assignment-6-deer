@@ -7,7 +7,7 @@ import {
 	PrimaryGeneratedColumn,
 	UpdateDateColumn
 } from "typeorm";
-import { UserKickboardHistories } from "./userKickboardHistories.entity";
+import { UseKickboardHistories } from "./useKickboardHistories.entity";
 import { Areas } from "./areas.entity";
 
 @Entity("deer_kickboards")
@@ -28,8 +28,8 @@ export class DeerKickboards {
 	updatedAt!: Date;
 
 	@OneToMany(
-		() => UserKickboardHistories,
-		(userKickboardHistories) => userKickboardHistories.deer_id
+		() => UseKickboardHistories,
+		(useKickboardHistories) => useKickboardHistories.deer_id
 	)
-	userKickboardHistories?: UserKickboardHistories[];
+	useKickboardHistories?: UseKickboardHistories[];
 }

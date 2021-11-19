@@ -1,6 +1,6 @@
 import { Entity, ManyToOne, PrimaryGeneratedColumn, JoinColumn } from "typeorm";
 import { Exceptions } from "./exceptions.entity";
-import { UserKickboardHistories } from "./userKickboardHistories.entity";
+import { UseKickboardHistories } from "./useKickboardHistories.entity";
 
 @Entity()
 export class ExceptionHistories {
@@ -14,11 +14,11 @@ export class ExceptionHistories {
 	exception_id!: number;
 
 	@ManyToOne(
-		() => UserKickboardHistories,
-		(userHistories) => userHistories.exception
+		() => UseKickboardHistories,
+		(useHistories) => useHistories.exception
 	)
 	@JoinColumn([
-		{ name: "user_history_id", referencedColumnName: "user_history_id" }
+		{ name: "use_history_id", referencedColumnName: "use_history_id" }
 	])
-	user_history_id!: number;
+	use_history_id!: number;
 }

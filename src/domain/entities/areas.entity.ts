@@ -12,7 +12,7 @@ import { AreaPolicies } from "./areaPolicies.entity";
 import { DeerKickboards } from "./deerKickboards.entity";
 import { ForbiddenAreaZones } from "./forbiddenAreaZones.entity";
 import { ParkingZones } from "./parkingZones.entity";
-import { UserKickboardHistories } from "./userKickboardHistories.entity";
+import { UseKickboardHistories } from "./useKickboardHistories.entity";
 
 @Entity("areas")
 export class Areas {
@@ -32,10 +32,10 @@ export class Areas {
 	updatedAt!: Date;
 
 	// @OneToMany(
-	// 	() => UserKickboardHistories,
-	// 	(userKickboardHistories) => userKickboardHistories.area_id
+	// 	() => UseKickboardHistories,
+	// 	(useKickboardHistories) => useKickboardHistories.area_id
 	// )
-	// userKickboardHistories?: UserKickboardHistories[];
+	// useKickboardHistories?: UseKickboardHistories[];
 
 	@OneToMany(() => AreaCoords, (areaCoords) => areaCoords.area_id)
 	area_coords?: AreaCoords[];

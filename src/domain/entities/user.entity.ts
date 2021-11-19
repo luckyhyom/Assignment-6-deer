@@ -7,7 +7,7 @@ import {
 	PrimaryColumn,
 	UpdateDateColumn
 } from "typeorm";
-import { UserKickboardHistories } from "./userKickboardHistories.entity";
+import { UseKickboardHistories } from "./useKickboardHistories.entity";
 
 @Entity("users")
 export class Users {
@@ -22,10 +22,10 @@ export class Users {
 	password!: string;
 
 	@OneToMany(
-		() => UserKickboardHistories,
-		(userKickboardHistories) => userKickboardHistories.user_id
+		() => UseKickboardHistories,
+		(useKickboardHistories) => useKickboardHistories.user_id
 	)
-	userKickboardHistories?: UserKickboardHistories[];
+	useKickboardHistories?: UseKickboardHistories[];
 
 	@CreateDateColumn()
 	createdAt!: Date;

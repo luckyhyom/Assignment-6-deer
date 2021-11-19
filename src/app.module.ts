@@ -18,8 +18,11 @@ import { ForbiddenCoords } from "./domain/entities/forbiddenCoords.entity";
 import { ParkingZones } from "./domain/entities/parkingZones.entity";
 import { Penalties } from "./domain/entities/penalties.entity";
 import { PenaltyHistories } from "./domain/entities/penaltyHistories.entity";
-import { UserKickboardHistories } from "./domain/entities/userKickboardHistories.entity";
+import { UseKickboardHistories } from "./domain/entities/useKickboardHistories.entity";
 import { UserRepository } from "./domain/user/user.repository";
+import { RentalPayController } from "./domain/rentalPay/rentalPay.controller";
+import { RentalPayService } from "./domain/rentalPay/rentalPay.service";
+import { RentalPayModule } from "./domain/rentalPay/rentalPay.module";
 
 @Module({
 	imports: [
@@ -47,34 +50,16 @@ import { UserRepository } from "./domain/user/user.repository";
 				Penalties,
 				PenaltyHistories,
 				Users,
-				UserKickboardHistories,
-				UserRepository,
+				UseKickboardHistories,
+				UserRepository
 			],
 			// synchronize: true,
 			// synchronize: false,
 			keepConnectionAlive: true
 		}),
 		UserModule,
-		AuthModule
+		AuthModule,
+		RentalPayModule
 	]
 })
 export class AppModule {}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

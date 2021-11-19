@@ -13,18 +13,18 @@ import { ExceptionHistories } from "./exceptionHistories.entity";
 import { PenaltyHistories } from "./penaltyHistories.entity";
 import { Users } from "./user.entity";
 
-@Entity("user_kickboard_histories")
-export class UserKickboardHistories {
+@Entity("use_kickboard_histories")
+export class UseKickboardHistories {
 	@PrimaryGeneratedColumn()
-	user_history_id: number;
+	use_history_id: number;
 
-	@ManyToOne(() => Users, (user) => user.userKickboardHistories)
+	@ManyToOne(() => Users, (user) => user.useKickboardHistories)
 	@JoinColumn([{ name: "user_id", referencedColumnName: "user_id" }])
 	user_id!: string;
 
 	@ManyToOne(
 		() => DeerKickboards,
-		(deerKickboards) => deerKickboards.userKickboardHistories
+		(deerKickboards) => deerKickboards.useKickboardHistories
 	)
 	@JoinColumn([{ name: "deer_id", referencedColumnName: "deer_id" }])
 	deer_id!: number;
@@ -56,19 +56,19 @@ export class UserKickboardHistories {
 
 	@OneToMany(
 		() => DiscountHistories,
-		(discountHistory) => discountHistory.user_history_id
+		(discountHistory) => discountHistory.use_history_id
 	)
 	discount?: DiscountHistories[];
 
 	@OneToMany(
 		() => PenaltyHistories,
-		(penaltyHistory) => penaltyHistory.user_history_id
+		(penaltyHistory) => penaltyHistory.use_history_id
 	)
 	penalty?: PenaltyHistories[];
 
 	@OneToMany(
 		() => ExceptionHistories,
-		(exceptionHistory) => exceptionHistory.user_history_id
+		(exceptionHistory) => exceptionHistory.use_history_id
 	)
 	exception?: PenaltyHistories[];
 }

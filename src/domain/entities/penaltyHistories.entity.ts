@@ -1,6 +1,6 @@
 import { Entity, ManyToOne, PrimaryGeneratedColumn, JoinColumn } from "typeorm";
 import { Penalties } from "./penalties.entity";
-import { UserKickboardHistories } from "./userKickboardHistories.entity";
+import { UseKickboardHistories } from "./useKickboardHistories.entity";
 
 @Entity("penalty_histories")
 export class PenaltyHistories {
@@ -12,11 +12,11 @@ export class PenaltyHistories {
 	penalty_id!: number;
 
 	@ManyToOne(
-		() => UserKickboardHistories,
-		(userHistories) => userHistories.penalty
+		() => UseKickboardHistories,
+		(useHistories) => useHistories.penalty
 	)
 	@JoinColumn([
-		{ name: "user_history_id", referencedColumnName: "user_history_id" }
+		{ name: "use_history_id", referencedColumnName: "use_history_id" }
 	])
-	user_history_id!: number;
+	use_history_id!: number;
 }

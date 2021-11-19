@@ -48,9 +48,9 @@ import { UserRepository } from "./domain/user/user.repository";
 				PenaltyHistories,
 				Users,
 				UserKickboardHistories,
-				UserRepository,
+				UserRepository
 			],
-			// synchronize: true,
+			synchronize: true,
 			// synchronize: false,
 			keepConnectionAlive: true
 		}),
@@ -59,22 +59,3 @@ import { UserRepository } from "./domain/user/user.repository";
 	]
 })
 export class AppModule {}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

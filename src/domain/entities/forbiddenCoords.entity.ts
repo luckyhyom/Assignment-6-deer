@@ -14,10 +14,10 @@ export class ForbiddenCoords {
 	@PrimaryGeneratedColumn()
 	forbidden_coords_id!: number;
 
-	@Column("decimal", { precision: 20, scale: 2 })
+	@Column("decimal", { precision: 16, scale: 14 })
 	forbidden_coords_lat!: number;
 
-	@Column("decimal", { precision: 20, scale: 2 })
+	@Column("decimal", { precision: 17, scale: 14 })
 	forbidden_coords_lng!: number;
 
 	@CreateDateColumn()

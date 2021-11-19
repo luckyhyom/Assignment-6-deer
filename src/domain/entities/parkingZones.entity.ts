@@ -12,7 +12,7 @@ import { Areas } from "./areas.entity";
 @Entity("parking_zones")
 export class ParkingZones {
 	@PrimaryGeneratedColumn()
-	user_history_id!: number;
+	parking_zone_id!: number;
 
 	@ManyToOne(() => Areas, (area) => area.parking_zones)
 	@JoinColumn([{ name: "area_id", referencedColumnName: "area_id" }])

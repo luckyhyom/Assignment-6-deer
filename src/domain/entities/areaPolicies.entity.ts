@@ -2,6 +2,7 @@ import {
 	Column,
 	CreateDateColumn,
 	Entity,
+	JoinColumn,
 	OneToOne,
 	PrimaryGeneratedColumn,
 	UpdateDateColumn
@@ -26,5 +27,6 @@ export class AreaPolicies {
 	updatedAt!: Date;
 
 	@OneToOne(() => Areas)
+	@JoinColumn([{ name: "area_id", referencedColumnName: "area_id" }])
 	area_id!: number;
 }

@@ -50,7 +50,7 @@ import { UserRepository } from "./domain/user/user.repository";
 				UserKickboardHistories,
 				UserRepository,
 			],
-			synchronize: true,
+			// synchronize: true,
 			// synchronize: false,
 			keepConnectionAlive: true
 		}),

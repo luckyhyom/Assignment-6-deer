@@ -19,8 +19,8 @@ export class Areas {
 	@PrimaryGeneratedColumn()
 	area_id!: number;
 
-	@Column("geometry", { nullable: true, name: "polygon" })
-	area_bounday!: string;
+	@Column("geometry", { nullable: true })
+	area_boundary!: string;
 
 	@Column("point")
 	area_center!: string;

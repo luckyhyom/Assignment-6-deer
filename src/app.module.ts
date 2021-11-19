@@ -20,9 +20,8 @@ import { Penalties } from "./domain/entities/penalties.entity";
 import { PenaltyHistories } from "./domain/entities/penaltyHistories.entity";
 import { UseKickboardHistories } from "./domain/entities/useKickboardHistories.entity";
 import { UserRepository } from "./domain/user/user.repository";
-import { RentalPayController } from "./domain/rentalPay/rentalPay.controller";
-import { RentalPayService } from "./domain/rentalPay/rentalPay.service";
 import { RentalPayModule } from "./domain/rentalPay/rentalPay.module";
+import { LocationCheckModule } from "./global/util/locationCheck/locationCheck.module";
 
 @Module({
 	imports: [
@@ -55,10 +54,12 @@ import { RentalPayModule } from "./domain/rentalPay/rentalPay.module";
 			],
 			// synchronize: true,
 			// synchronize: false,
-			keepConnectionAlive: true
+			keepConnectionAlive: true,
+			logging: true
 		}),
 		UserModule,
 		AuthModule,
+		LocationCheckModule,
 		RentalPayModule
 	]
 })

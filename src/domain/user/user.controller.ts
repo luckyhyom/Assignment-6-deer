@@ -28,7 +28,7 @@ export class UserController {
 	}
 
 	@UseGuards(LocalAuthGuard)
-	@Get("signin")
+	@Post("signin")
 	async signIn(@Request() req): Promise<ResponseTokenDto> {
 		return { token: this.authService.makeToken(req.user) };
 	}

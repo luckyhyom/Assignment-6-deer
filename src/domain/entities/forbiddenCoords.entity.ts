@@ -20,10 +20,10 @@ export class ForbiddenCoords {
 	@Column("decimal", { precision: 20, scale: 2 })
 	forbidden_coords_lng!: number;
 
-	@CreateDateColumn({ default: Date.now() })
+	@CreateDateColumn()
 	createdAt!: Date;
 
-	@UpdateDateColumn({ default: Date.now() })
+	@UpdateDateColumn()
 	updatedAt!: Date;
 
 	@ManyToOne(

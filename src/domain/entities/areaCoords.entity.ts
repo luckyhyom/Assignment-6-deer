@@ -27,6 +27,6 @@ export class AreaCoords {
 	updatedAt!: Date;
 
 	@ManyToOne(() => Areas, (area) => area.area_coords)
-	@JoinColumn([{ name: "area_id", referencedColumnName: "area_id" }])
+	@JoinColumn()
 	area_id!: number;
 }

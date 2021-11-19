@@ -2,7 +2,7 @@ import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { UserRepository } from "../user/user.repository";
 import * as bcrypt from "bcrypt";
 import { JwtService } from "@nestjs/jwt";
-import { User } from "../entities/user.entity";
+import { Users } from "../entities/user.entity";
 
 @Injectable()
 export class AuthService {
@@ -22,7 +22,7 @@ export class AuthService {
 		return user;
 	}
 
-	makeToken(user: User) {
+	makeToken(user: Users) {
 		const payload = { user_id: user.user_id, user_name: user.user_name };
 		return this.jwtService.sign(payload);
 	}

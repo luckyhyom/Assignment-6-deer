@@ -1,13 +1,25 @@
 import { Module } from "@nestjs/common";
-import { AppController } from "./app.controller";
-import { AppService } from "./app.service";
-import { UserController } from "./domain/user/user.controller";
-import { UserService } from "./domain/user/user.service";
-import { AuthService } from "./domain/auth/auth.service";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { User } from "./domain/entities/user.entity";
+import { Users } from "./domain/entities/user.entity";
 import { AuthModule } from "./domain/auth/auth.module";
 import { UserModule } from "./domain/user/user.module";
+import { AreaCoords } from "./domain/entities/areaCoords.entity";
+import { AreaPolicies } from "./domain/entities/areaPolicies.entity";
+import { Areas } from "./domain/entities/areas.entity";
+import { CodeGroups } from "./domain/entities/codeGroups.entity";
+import { Codes } from "./domain/entities/codes.entity";
+import { DeerKickboards } from "./domain/entities/deerKickboards.entity";
+import { DiscountHistories } from "./domain/entities/discountHistories.entity";
+import { Discounts } from "./domain/entities/discounts.entity";
+import { ExceptionHistories } from "./domain/entities/exceptionHistories.entity";
+import { Exceptions } from "./domain/entities/exceptions.entity";
+import { ForbiddenAreaZones } from "./domain/entities/forbiddenAreaZones.entity";
+import { ForbiddenCoords } from "./domain/entities/forbiddenCoords.entity";
+import { ParkingZones } from "./domain/entities/parkingZones.entity";
+import { Penalties } from "./domain/entities/penalties.entity";
+import { PenaltyHistories } from "./domain/entities/penaltyHistories.entity";
+import { UserKickboardHistories } from "./domain/entities/userKickboardHistories.entity";
+import { UserRepository } from "./domain/user/user.repository";
 
 @Module({
 	imports: [
@@ -18,7 +30,26 @@ import { UserModule } from "./domain/user/user.module";
 			username: process.env.DB_USER,
 			password: process.env.DB_PASSWORD,
 			database: process.env.DB_DATABASE,
-			entities: [User],
+			entities: [
+				AreaCoords,
+				AreaPolicies,
+				Areas,
+				CodeGroups,
+				Codes,
+				DeerKickboards,
+				DiscountHistories,
+				Discounts,
+				ExceptionHistories,
+				Exceptions,
+				ForbiddenAreaZones,
+				ForbiddenCoords,
+				ParkingZones,
+				Penalties,
+				PenaltyHistories,
+				Users,
+				UserKickboardHistories,
+				UserRepository,
+			],
 			synchronize: true,
 			// synchronize: false,
 			keepConnectionAlive: true
@@ -28,3 +59,22 @@ import { UserModule } from "./domain/user/user.module";
 	]
 })
 export class AppModule {}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

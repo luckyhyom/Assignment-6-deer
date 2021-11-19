@@ -9,7 +9,7 @@ export class ExceptionHistories {
 
 	@ManyToOne(() => Exceptions, (exception) => exception.history)
 	@JoinColumn([
-		{ name: "exception_id", referencedColumnName: "exception_id" }
+		{ name: "exception_id", referencedColumnName: "exceptions_id" }
 	])
 	exception_id!: number;
 

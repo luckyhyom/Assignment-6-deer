@@ -4,12 +4,17 @@ import { ForbiddenAreaZones } from "../entities/forbiddenAreaZones.entity";
 @EntityRepository(ForbiddenAreaZones)
 export class ForbiddenAreaZoneRepository extends Repository<ForbiddenAreaZones> {
 	async findForbiddenArea(lat, lng) {
-		return await this.createQueryBuilder("forbidden_area_zones ")
-			.select("forbidden_area_id")
+		const query = await this.createQueryBuilder("f")
+			.select(
+				"CASE WHEN MAX(f.area_id) IS NULL THEN false ELSE true END",
+				"checkInForbidden"
+			)
 			.where(
-				"ST_Contains(forbidden_area_boundary, ST_PointFromText('POINT (:lat :lng)'))",
+				"st_contains(f.forbidden_area_boundary, ST_PointFromText('POINT (:lat :lng)'))",
 				{ lat, lng }
 			)
-			.execute();
+			.getRawOne();
+
+		return query.checkInForbidden;
 	}
 }

@@ -7,16 +7,18 @@ import { AreaPolicyRepository } from "./areaPolicy.repository";
 import { AreaRepository } from "./area.repository";
 import { ForbiddenAreaZoneRepository } from "./forbiddenAreaZone.repository";
 import { ParkingZoneRepository } from "./parkingZone.repository";
+import { PenaltyModule } from "src/global/util/payment/penalty/penalty.module";
 
 @Module({
 	imports: [
-		TypeOrmModule.forFeature([
-			UseKickboardHistoryRepository,
-			AreaRepository,
-			AreaPolicyRepository,
-			ForbiddenAreaZoneRepository,
-			ParkingZoneRepository
-		])
+		// TypeOrmModule.forFeature([
+		// 	UseKickboardHistoryRepository,
+		// 	AreaRepository,
+		// 	AreaPolicyRepository,
+		// 	ForbiddenAreaZoneRepository,
+		// 	ParkingZoneRepository
+		// ])
+		PenaltyModule
 	],
 	controllers: [RentalPayController],
 	providers: [RentalPayService]

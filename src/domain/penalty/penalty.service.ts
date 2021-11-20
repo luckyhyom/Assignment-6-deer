@@ -18,35 +18,38 @@ export class PenaltyService {
 	) {}
 
 	async check(rentalInfo: PenaltyDto) {
-		rentalInfo = await this.outOfArea(rentalInfo);
-		rentalInfo = await this.inForbiddenZone(rentalInfo);
-		return rentalInfo;
+		const array = [];
+		const row1 = await this.isOutOfArea(rentalInfo);
+		const row2 = await this.isInForbiddenZone(rentalInfo);
+		if (row1) array.push(row1);
+		if (row2) array.push(row2);
+		return array;
 	}
 
 	// 지역 이탈
-	private async outOfArea(rentalInfo: PenaltyDto) {
-		let dist = await this.areaRepository.returnDistance(
+	private async isOutOfArea(rentalInfo) {
+		const flag = await this.areaRepository.checkInArea(
+			rentalInfo.deer_id,
 			rentalInfo.use_end_lat,
 			rentalInfo.use_end_lng
 		);
-		dist *= 111 / 10; // 100m단위로 변경 1도 -> 111km
+		if (!flag) return;
 		const penaltyInfo = await this.penaltyRepository.getPenalty(
 			this.penaltyList.outOfArea
 		);
-		rentalInfo.pay += dist * penaltyInfo.penalty_pay;
-		return rentalInfo;
+		return penaltyInfo;
 	}
 
 	// 주차 금지구역
-	private async inForbiddenZone(rentalInfo: PenaltyDto) {
+	private async isInForbiddenZone(rentalInfo: PenaltyDto) {
 		const flag = await this.forbiddenAreaZoneRepository.findForbiddenArea(
 			rentalInfo.use_end_lat,
 			rentalInfo.use_end_lng
 		);
+		if (!flag) return;
 		const penaltyInfo = await this.penaltyRepository.getPenalty(
 			this.penaltyList.inForbiddenZone
 		);
-		if (flag) rentalInfo.pay += penaltyInfo.penalty_pay;
-		return rentalInfo;
+		return penaltyInfo;
 	}
 }

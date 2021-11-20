@@ -1,6 +1,6 @@
 import { IsInt, IsDate, IsNotEmpty, IsDecimal } from "class-validator";
 
-export class PenaltyDto {
+export class ExceptionDto {
 	@IsInt()
 	@IsNotEmpty()
 	deer_id!: number;

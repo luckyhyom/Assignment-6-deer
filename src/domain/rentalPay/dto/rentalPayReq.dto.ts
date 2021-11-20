@@ -22,6 +22,5 @@ export class RentalPayReqDto {
 	use_end_at!: Date;
 
 	@IsDecimal()
-	@IsNotEmpty()
-	base_payment: any;
+	base_payment?: any | null;
 }

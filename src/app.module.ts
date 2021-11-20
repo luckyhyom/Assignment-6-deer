@@ -22,11 +22,9 @@ import { UseKickboardHistories } from "./domain/entities/useKickboardHistories.e
 import { UserRepository } from "./domain/user/user.repository";
 import { RentalPayModule } from "./domain/rentalPay/rentalPay.module";
 import { LocationCheckModule } from "./global/util/locationCheck/locationCheck.module";
-import { DiscountModule } from './domain/discount/discount.module';
-import { PenaltyService } from './domain/penalty/penalty.service';
-import { PenaltyModule } from './domain/penalty/penalty.module';
-import { ExceptionService } from './domain/exception/exception.service';
-import { ExceptionModule } from './domain/exception/exception.module';
+import { DiscountModule } from "./domain/discount/discount.module";
+import { PenaltyModule } from "./domain/penalty/penalty.module";
+import { ExceptionModule } from "./domain/exception/exception.module";
 
 @Module({
 	imports: [
@@ -57,7 +55,7 @@ import { ExceptionModule } from './domain/exception/exception.module';
 				UseKickboardHistories,
 				UserRepository
 			],
-			// synchronize: true,
+			synchronize: true,
 			// synchronize: false,
 			keepConnectionAlive: true,
 			logging: true
@@ -69,7 +67,6 @@ import { ExceptionModule } from './domain/exception/exception.module';
 		DiscountModule,
 		PenaltyModule,
 		ExceptionModule
-	],
-	providers: [PenaltyService, ExceptionService]
+	]
 })
 export class AppModule {}

@@ -1,12 +1,12 @@
 import { Injectable } from "@nestjs/common";
 import { JwtPayload } from "../auth/dto/jwtPayload.dto";
 import { DiscountService } from "../discount/discount.service";
-import { ExceptionService } from "../exception/exception.service";
-import { PenaltyService } from "../penalty/penalty.service";
 import { AreaRepository } from "./area.repository";
 import { AreaPolicyRepository } from "./areaPolicy.repository";
 import { RentalPayReqDto } from "./dto/rentalPayReq.dto";
 import { UseKickboardHistoryRepository } from "./useKickboardHistory.repository";
+import { ExcepService } from "../exception/excep.service";
+import { PenaltyService } from "../penalty/penalty.service";
 
 @Injectable()
 export class RentalPayService {
@@ -23,7 +23,7 @@ export class RentalPayService {
 	constructor(
 		private readonly discountService: DiscountService,
 		private readonly penaltyService: PenaltyService,
-		private readonly exceptionService: ExceptionService,
+		private readonly ExcepService: ExcepService,
 		private readonly useKickboardHistoryRepository: UseKickboardHistoryRepository,
 		private readonly areaPolicyRepository: AreaPolicyRepository,
 		private readonly areaRepository: AreaRepository
@@ -33,7 +33,7 @@ export class RentalPayService {
 		let pay = 0;
 
 		// 예외 확인
-		const exceptionList = await this.exceptionService.check(rentalPayReq);
+		const exceptionList = await this.ExcepService.check(rentalPayReq);
 		if (exceptionList.length > 0) {
 			return this.calculate(rentalPayReq, exceptionList, pay);
 		}
@@ -52,18 +52,26 @@ export class RentalPayService {
 		const penaltyList = await this.penaltyService.check(rentalPayReq);
 		// 벌금 계산
 		if (penaltyList.length > 0) {
-			return this.calculate(rentalPayReq, penaltyList, pay);
+			return await this.calculate(rentalPayReq, penaltyList, pay);
 		}
 
 		// 할인 확인
-		const discountList = this.discountService.check(rentalPayReq);
+		const discountDTO = {
+			user_id: user.user_id,
+			use_end_lat: rentalPayReq.use_end_lat,
+			use_end_lng: rentalPayReq.use_end_lng,
+			base_payment: rentalPayReq.base_payment
+		};
+
+		const history = await this.useKickboardHistoryRepository.findLatestOneOfUser(
+			user.user_id
+		);
+
+		const discountList = await this.discountService.check(discountDTO);
+
 		// 할인 계산
 		if (discountList.length > 0) {
-			pay = this.calculate(rentalPayReq, discountList, pay);
-			return this.useKickboardHistoryRepository.createOne(
-				rentalPayReq,
-				pay
-			);
+			return await this.calculate(rentalPayReq.base_payment, discountList, pay, history, rentalPayReq.base_payment);
 		}
 	}
 
@@ -74,8 +82,12 @@ export class RentalPayService {
 		);
 	}
 
-	calculate(rentalPayReq, list, pay) {
+	calculate(rentalPayReq, list, pay, history=null, base_payment=null) {
 		const sortedList = list.slice().sort((a, b) => b.code_id - a.code_id);
+
+		if (this.discountService.isReusing(history)) {
+			pay -= base_payment;
+		}
 
 		sortedList.forEach(async (item) => {
 			item.discount_name;
@@ -83,10 +95,10 @@ export class RentalPayService {
 			switch (item.code_id) {
 				case this.calculationType.discountPrice:
 					pay = Math.max(0, pay - item.discount_pay);
-					break;
+					return this.returnPay(rentalPayReq, pay);
 				case this.calculationType.discountPercent:
 					pay *= 1 - item.discount_pay;
-					break;
+					return this.returnPay(rentalPayReq, pay);
 				case this.calculationType.penaltyPercent:
 					pay *= 1 + item.penalty_pay;
 					break;

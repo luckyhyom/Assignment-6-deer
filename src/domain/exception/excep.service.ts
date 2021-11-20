@@ -3,7 +3,7 @@ import { ExceptionDto } from "./dto/exceptionDto.dto";
 import { ExceptionRepository } from "./exception.repository";
 
 @Injectable()
-export class ExceptionService {
+export class ExcepService {
 	exceptionList = {
 		oneMinute: 1
 	};

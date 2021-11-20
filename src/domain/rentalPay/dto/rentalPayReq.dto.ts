@@ -20,4 +20,8 @@ export class RentalPayReqDto {
 	@IsDate()
 	@IsNotEmpty()
 	use_end_at!: Date;
+
+	@IsDecimal()
+	@IsNotEmpty()
+	base_payment: any;
 }

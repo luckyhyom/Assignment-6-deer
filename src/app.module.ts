@@ -22,6 +22,7 @@ import { UseKickboardHistories } from "./domain/entities/useKickboardHistories.e
 import { UserRepository } from "./domain/user/user.repository";
 import { RentalPayModule } from "./domain/rentalPay/rentalPay.module";
 import { LocationCheckModule } from "./global/util/locationCheck/locationCheck.module";
+import { DiscountModule } from './domain/discount/discount.module';
 
 @Module({
 	imports: [
@@ -60,7 +61,8 @@ import { LocationCheckModule } from "./global/util/locationCheck/locationCheck.m
 		UserModule,
 		AuthModule,
 		LocationCheckModule,
-		RentalPayModule
+		RentalPayModule,
+		DiscountModule
 	]
 })
 export class AppModule {}

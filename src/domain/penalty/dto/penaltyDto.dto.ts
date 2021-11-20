@@ -1,6 +1,6 @@
-import { IsDate, IsDecimal, IsInt, IsNotEmpty } from "class-validator";
+import { IsInt, IsDate, IsNotEmpty, IsDecimal } from "class-validator";
 
-export class RentalPayReqDto {
+export class PenaltyDto {
 	@IsInt()
 	@IsNotEmpty()
 	deer_id!: number;
@@ -20,7 +20,4 @@ export class RentalPayReqDto {
 	@IsDate()
 	@IsNotEmpty()
 	use_end_at!: Date;
-
-	@IsDecimal()
-	base_payment?: any | null;
 }

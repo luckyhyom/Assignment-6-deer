@@ -22,6 +22,9 @@ import { UseKickboardHistories } from "./domain/entities/useKickboardHistories.e
 import { UserRepository } from "./domain/user/user.repository";
 import { RentalPayModule } from "./domain/rentalPay/rentalPay.module";
 import { LocationCheckModule } from "./global/util/locationCheck/locationCheck.module";
+import { DiscountModule } from "./domain/discount/discount.module";
+import { PenaltyModule } from "./domain/penalty/penalty.module";
+import { ExceptionModule } from "./domain/exception/exception.module";
 
 @Module({
 	imports: [
@@ -52,7 +55,7 @@ import { LocationCheckModule } from "./global/util/locationCheck/locationCheck.m
 				UseKickboardHistories,
 				UserRepository
 			],
-			// synchronize: true,
+			synchronize: true,
 			// synchronize: false,
 			keepConnectionAlive: true,
 			logging: true
@@ -60,7 +63,10 @@ import { LocationCheckModule } from "./global/util/locationCheck/locationCheck.m
 		UserModule,
 		AuthModule,
 		LocationCheckModule,
-		RentalPayModule
+		RentalPayModule,
+		DiscountModule,
+		PenaltyModule,
+		ExceptionModule
 	]
 })
 export class AppModule {}

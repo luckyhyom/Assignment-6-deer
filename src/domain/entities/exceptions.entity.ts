@@ -11,10 +11,10 @@ import { ExceptionHistories } from "./exceptionHistories.entity";
 @Entity("exceptions")
 export class Exceptions {
 	@PrimaryGeneratedColumn()
-	exceptions_id!: number;
+	exception_id!: number;
 
 	@Column("varchar", { length: 50 })
-	exceptions_name!: string;
+	exception_name!: string;
 
 	@Column("int")
 	code_id!: number;

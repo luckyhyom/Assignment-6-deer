@@ -2,7 +2,8 @@ import { Injectable } from "@nestjs/common";
 import { ParkingZoneRepository } from "../rentalPay/parkingZone.repository";
 import { UseKickboardHistoryRepository } from "../rentalPay/useKickboardHistory.repository";
 import { DiscountRepository } from "./discount.repository";
-import { DiscountDto } from "./dto/discount.dto";
+import { RentalPayDto } from "./dto/discount.dto";
+import { DiscountResDto } from "./dto/discountRes.dto";
 
 @Injectable()
 export class DiscountService {
@@ -13,70 +14,55 @@ export class DiscountService {
 
 	constructor(
 		private readonly useKickboardHistoryRepository: UseKickboardHistoryRepository,
-		// private readonly areaRepository: AreaRepository,
-		// private readonly areaPolicyRepository: AreaPolicyRepository,
-		// private readonly forbiddenAreaZoneRepository: ForbiddenAreaZoneRepository,
 		private readonly parkingZoneRepository: ParkingZoneRepository,
 		private readonly discountRepository: DiscountRepository
 	) {}
 
-	check(discountDto: DiscountDto) {
+	async check(rentalPayDto: RentalPayDto): Promise<DiscountResDto[]> {
 		const useHistory =
-			this.useKickboardHistoryRepository.findLatestOneOfUser(
-				discountDto.user_id
+			await this.useKickboardHistoryRepository.findLatestOneOfUser(
+				rentalPayDto.user_id
 			);
-		// this.firstUsing
 
-		this.isParking(discountDto.use_end_lat, discountDto.use_end_lng);
-		this.isUsing(useHistory);
-		this.isReusing(useHistory);
+		const list = [
+			await this.isParking(
+				rentalPayDto.use_end_lat,
+				rentalPayDto.use_end_lng
+			),
+			await this.isFirstUsing(useHistory)
+		];
+
+		const result = list.map((item) => new DiscountResDto(item));
+		return result.filter((item) => item.code_id);
 	}
 
-	// 파킹존 반납
-	private isParking(lat, lng) {
-		if (!this.parkingZoneRepository.findParkingZone(lat, lng)) {
+	// 30분 이내 다시 이용시 기본요금 면제
+	async isReusing(useHistory) {
+		const nowTime = new Date().getTime() / 60000;
+		const lastTime = new Date(useHistory.use_end_at).getTime() / 60000;
+		if (nowTime - lastTime < 30) {
+			return true;
+		}
+		return false;
+	}
+
+	// 파킹존 할인
+	private async isParking(lat, lng) {
+		if (!(await this.parkingZoneRepository.findParkingZone(lat, lng))) {
 			return;
 		}
 
-		const parkingDiscount = this.discountRepository.getDiscount(
+		return await this.discountRepository.getDiscount(
 			this.discountList.parkingZone
 		);
-		return {
-			// ...parkingDiscount
-			할인이름: "파킹존",
-			할인: "30%"
-		};
 	}
 
 	// 첫 이용
-	private isUsing(useHistory) {
-		// 첫이용할인체크클래스()
-		console.log(useHistory); // null 인지 빈 객체인지
-		if (!useHistory)
-			// const firstUsingDiscount = this.discountRepository.getDiscount(
-			// 	this.discountId.firstUsing
-			// );
-			return this.discountList.firstUsing;
-
-		return {
-			할인코드: "첫이용할인"
-		};
-	}
-
-	// 30분 이내 다시 이용시 기본요금 면제 근데 이건 테이블에 없지않아유???
-	private isReusing(useHistory) {
-		// if(useHistory)
+	private async isFirstUsing(useHistory) {
+		if (!useHistory) {
+			return await this.discountRepository.getDiscount(
+				this.discountList.firstUsing
+			);
+		}
 	}
 }
-
-/** 드디어 됐다. 네네 환영 그럼 일단 만들어봅시다요.
- * 할인 적용 클래스 {
- *
- *  함수() {
- *      파킹존할인체크()
- *      첫이용할인체크클래스()
- *      return 할인 목록
- *  }
- * }
- *
- */

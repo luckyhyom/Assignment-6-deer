@@ -8,6 +8,9 @@ import { AreaRepository } from "./area.repository";
 import { ForbiddenAreaZoneRepository } from "./forbiddenAreaZone.repository";
 import { ParkingZoneRepository } from "./parkingZone.repository";
 import { AuthModule } from "../auth/auth.module";
+import { DiscountModule } from "../discount/discount.module";
+import { PenaltyModule } from "../penalty/penalty.module";
+import { ExceptionModule } from "../exception/exception.module";
 
 @Module({
 	imports: [
@@ -17,7 +20,11 @@ import { AuthModule } from "../auth/auth.module";
 			AreaPolicyRepository,
 			ForbiddenAreaZoneRepository,
 			ParkingZoneRepository
-		]), AuthModule
+		]),
+		AuthModule,
+		DiscountModule,
+		PenaltyModule,
+		ExceptionModule
 	],
 	controllers: [RentalPayController],
 	providers: [RentalPayService]

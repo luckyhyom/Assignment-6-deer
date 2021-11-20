@@ -23,6 +23,8 @@ import { UserRepository } from "./domain/user/user.repository";
 import { RentalPayModule } from "./domain/rentalPay/rentalPay.module";
 import { LocationCheckModule } from "./global/util/locationCheck/locationCheck.module";
 import { DiscountModule } from './domain/discount/discount.module';
+import { PenaltyService } from './domain/penalty/penalty.service';
+import { PenaltyModule } from './domain/penalty/penalty.module';
 
 @Module({
 	imports: [
@@ -62,7 +64,9 @@ import { DiscountModule } from './domain/discount/discount.module';
 		AuthModule,
 		LocationCheckModule,
 		RentalPayModule,
-		DiscountModule
-	]
+		DiscountModule,
+		PenaltyModule
+	],
+	providers: [PenaltyService]
 })
 export class AppModule {}

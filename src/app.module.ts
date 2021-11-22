@@ -25,6 +25,7 @@ import { LocationCheckModule } from "./global/util/locationCheck/locationCheck.m
 import { DiscountModule } from "./domain/discount/discount.module";
 import { PenaltyModule } from "./domain/penalty/penalty.module";
 import { ExceptionModule } from "./domain/exception/exception.module";
+import { CalculatorModule } from './domain/calculator/calculator.module';
 
 @Module({
 	imports: [
@@ -66,7 +67,8 @@ import { ExceptionModule } from "./domain/exception/exception.module";
 		RentalPayModule,
 		DiscountModule,
 		PenaltyModule,
-		ExceptionModule
+		ExceptionModule,
+		CalculatorModule
 	]
 })
 export class AppModule {}

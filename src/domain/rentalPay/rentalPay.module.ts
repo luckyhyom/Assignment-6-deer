@@ -11,6 +11,7 @@ import { AuthModule } from "../auth/auth.module";
 import { DiscountModule } from "../discount/discount.module";
 import { PenaltyModule } from "../penalty/penalty.module";
 import { ExceptionModule } from "../exception/exception.module";
+import { CalculatorModule } from "../calculator/calculator.module";
 
 @Module({
 	imports: [
@@ -24,7 +25,8 @@ import { ExceptionModule } from "../exception/exception.module";
 		AuthModule,
 		DiscountModule,
 		PenaltyModule,
-		ExceptionModule
+		ExceptionModule,
+		CalculatorModule
 	],
 	controllers: [RentalPayController],
 	providers: [RentalPayService]

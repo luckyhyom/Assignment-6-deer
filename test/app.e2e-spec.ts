@@ -43,28 +43,36 @@ describe("AppController (e2e)", () => {
 			});
 	});
 
-	it("/ (GET)", () => {
+	it("/ (GET) 벌금", () => {
 		return request(app.getHttpServer())
 			.post("/rentalPay")
 			.set("Authorization", `Bearer ${token}`)
 			.send({
-				deer_id: 1,
-				use_end_lat: 6.33830680279383,
-				use_end_lng: 0.580770335748556,
-				use_start_at: Date.now() - 1,
-				use_end_at: Date.now()
+				"deer_id": 1,
+				"use_end_lat": 4.74344340000000,
+				"use_end_lng": 5.13235410000000,
+				"use_start_at": "2021-11-19 05:27:25.524329",
+				"use_end_at": "2021-11-19 06:30:20.768057"
 			})
 			.expect((res) => {
 				console.log(res.body);
 			});
 	});
-	// it('/ (GET)', () => {
-	//   return request(app.getHttpServer())
-	//     .post('/rentalPay')
-	//     .send({
-
-	//     })
-	//     .expect(200)
-	//     .expect('Hello World!');
-	// });
+	
+	it("/ (GET) 할인", () => {
+		return request(app.getHttpServer())
+			.post("/rentalPay")
+			.set("Authorization", `Bearer ${token}`)
+			.send({
+				"deer_id": 1,
+				"use_end_lat": -1.54,
+				"use_end_lng": 0.46,
+				"use_start_at": "2021-11-19 05:27:25.524329",
+				"use_end_at": "2021-11-19 06:30:20.768057"
+			})
+			.expect((res) => {
+				console.log(res.body);
+			});
+	});
+	
 });

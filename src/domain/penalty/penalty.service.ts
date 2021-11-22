@@ -2,6 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { AreaRepository } from "../rentalPay/area.repository";
 import { ForbiddenAreaZoneRepository } from "../rentalPay/forbiddenAreaZone.repository";
 import { PenaltyDto } from "./dto/penaltyDto.dto";
+import { PenaltyRes } from "./dto/penaltyRes.dto";
 import { PenaltyRepository } from "./penalty.repository";
 
 @Injectable()
@@ -17,13 +18,17 @@ export class PenaltyService {
 		private readonly forbiddenAreaZoneRepository: ForbiddenAreaZoneRepository
 	) {}
 
-	async check(rentalInfo: PenaltyDto) {
+	async check(rentalInfo: PenaltyDto): Promise<PenaltyRes[]> {
 		const array = [];
 		const row1 = await this.isOutOfArea(rentalInfo);
 		const row2 = await this.isInForbiddenZone(rentalInfo);
 		if (row1) array.push(row1);
 		if (row2) array.push(row2);
-		return array;
+
+		const result = array.map( item => {
+			if (item) return new PenaltyRes(item);
+		});
+		return result;
 	}
 
 	// 지역 이탈

@@ -38,7 +38,7 @@ export class DiscountService {
 	}
 
 	// 30분 이내 다시 이용시 기본요금 면제
-	async isReusing(useHistory) {
+	static async isReusing(useHistory) {
 		const nowTime = new Date().getTime() / 60000;
 		const lastTime = new Date(useHistory.use_end_at).getTime() / 60000;
 		if (nowTime - lastTime < 30) {

@@ -33,20 +33,22 @@ export class PenaltyService {
 			rentalInfo.use_end_lat,
 			rentalInfo.use_end_lng
 		);
-		if (!flag) return;
+		if (flag) return;
 		const penaltyInfo = await this.penaltyRepository.getPenalty(
 			this.penaltyList.outOfArea
 		);
 		return penaltyInfo;
 	}
-
+	
 	// 주차 금지구역
 	private async isInForbiddenZone(rentalInfo: PenaltyDto) {
 		const flag = await this.forbiddenAreaZoneRepository.findForbiddenArea(
 			rentalInfo.use_end_lat,
 			rentalInfo.use_end_lng
 		);
-		if (!flag) return;
+		if (!flag) return; // false :통과 
+
+		// true : 벌금
 		const penaltyInfo = await this.penaltyRepository.getPenalty(
 			this.penaltyList.inForbiddenZone
 		);

@@ -1,5 +1,6 @@
 import {
 	Column,
+	CreateDateColumn,
 	Entity,
 	JoinColumn,
 	ManyToOne,
@@ -48,10 +49,10 @@ export class UseKickboardHistories {
 	})
 	pay!: number;
 
-	@Column("date")
+	@CreateDateColumn()
 	use_start_at!: Date;
 
-	@Column("date")
+	@CreateDateColumn()
 	use_end_at!: Date;
 
 	@OneToMany(

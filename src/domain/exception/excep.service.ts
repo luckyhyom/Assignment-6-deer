@@ -20,7 +20,7 @@ export class ExcepService {
 	async isLessOneMinute(rentalInfo) {
 		if (
 			new Date(rentalInfo.use_end_at).getTime() -
-			new Date(rentalInfo.use_start_at).getTime()
+			new Date(rentalInfo.use_start_at).getTime() < 1 * 60 * 1000
 		)
 			return await this.exceptionRepository.getException(
 				this.exceptionList.oneMinute

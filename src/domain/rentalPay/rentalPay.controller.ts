@@ -11,10 +11,7 @@ export class RentalPayController {
 	// 반납
 	@UseGuards(JwtGuard)
 	@Post()
-	async returnKickboard(
-		@Req() user: JwtPayload, // ???
-		@Body() body: RentalPayReqDto
-	) {
-		return await this.rentalPayService.createHistory(user, body);
+	async returnKickboard(@Req() req, @Body() body: RentalPayReqDto) {
+		return await this.rentalPayService.createHistory(req.user, body);
 	}
 }

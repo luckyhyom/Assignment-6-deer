@@ -55,7 +55,7 @@ import { ExceptionModule } from "./domain/exception/exception.module";
 				UseKickboardHistories,
 				UserRepository
 			],
-			synchronize: true,
+			// synchronize: true,
 			// synchronize: false,
 			keepConnectionAlive: true,
 			logging: true

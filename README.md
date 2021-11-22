@@ -173,7 +173,7 @@ forbidden_area_coords (반납금지구역의 경계를 표시하는 위도, 경�
 
 ## 🧬 **DB 모델링**
 
-![image-20211122105836458](C:\Users\TOP\AppData\Roaming\Typora\typora-user-images\image-20211122105836458.png)
+![image](https://user-images.githubusercontent.com/41619081/142798176-929f453e-07eb-4f3b-bfb5-99fd51667359.png)
 
 <br>
 
@@ -380,13 +380,13 @@ forbidden_area_coords (반납금지구역의 경계를 표시하는 위도, 경�
 
 #### 2. Sign Up, Sign In API를 이용하여 회원가입, 로그인을 진행합니다.
 
-![image-20211122123105447](C:\Users\TOP\AppData\Roaming\Typora\typora-user-images\image-20211122123105447.png)
+![image](https://user-images.githubusercontent.com/41619081/142798257-646e24ea-7a3e-479d-b4b1-4b190dc6089c.png)
 
-![image-20211122123118972](C:\Users\TOP\AppData\Roaming\Typora\typora-user-images\image-20211122123118972.png)
+![image](https://user-images.githubusercontent.com/41619081/142798277-f08b66b9-f638-4894-b709-60357859d2b0.png)
 
 #### 3. Return Pay API를 이용하여 킥보드 id, 이용 시작/종료 시간, 이용 종료 위도/경도를 이용하여 계산된 총 이용 요금을 반환합니다.
 
-![image-20211122123127685](C:\Users\TOP\AppData\Roaming\Typora\typora-user-images\image-20211122123127685.png)
+![image](https://user-images.githubusercontent.com/41619081/142798291-5086b8a8-8903-407f-8ac6-dd1a0feb3d09.png)
 
 
 

@@ -31,7 +31,7 @@
 
 ## 🌎 **배포**
 
-주소 : 
+주소 : [http://101.101.211.247:3000](http://101.101.211.247:3000/)
 
 <br>
 
@@ -193,25 +193,55 @@ forbidden_area_coords (반납금지구역의 경계를 표시하는 위도, 경�
 ```
 📁 src
 ├── 📁 domain
+│  ├── 📂 user
+│  │  ├── ...
+│  ├── 📂 auth
+│  │  ├── ...
 │  ├── 📂 entities
-│  │  ├── 📄 trials.entity.ts
-│  │  ├── 📄 updatedBundles.entity.ts
-│  │  └── 📄 updatedTrials.dto.ts
-│  ├── 📂 search
-│  │  ├── 📄 search.controller.spec.ts
-│  │  ├── 📄 search.controller.ts
-│  │  ├── 📄 search.module.ts
-│  │  ├── 📄 search.repository.ts
-│  │  ├── 📄 searchPage.repository.ts
-│  │  ├── 📄 search.service.spec.ts
-│  │  └── 📄 search.service.ts
-│  ├── 📂 trials
-│  │  ├── 📄 trials.module.ts
-│  │  ├── 📄 trials.repository.ts
-│  │  ├── 📄 trials.service.spec.ts
-│  │  ├── 📄 trials.service.ts
-│  │  ├── 📄 updatedTrialBundles.repository.ts
-│  │  └── 📄 updatedTrials.repository.ts
+│  │  ├── 📄 areaCoords.entity.ts
+│  │  ├── 📄 areaPolicies.entity.ts
+|  |  ├── 📄 areas.entity.ts
+|  |  ├── 📄 codeGroups.entity.ts
+|  |  ├── 📄 codes.entity.ts
+|  |  ├── 📄 deerKickboards.entity.ts
+|  |  ├── 📄 discounts.entity.ts
+|  |  ├── 📄 exceptions.entity.ts
+|  |  ├── 📄 forbiddenAreaZones.entity.ts
+|  |  ├── 📄 forbiddenCoords.entity.ts
+|  |  ├── 📄 ParkingZones.entity.ts
+|  |  ├── 📄 penalties.entity.ts
+|  |  ├── 📄 useKickboardHistories.entity.ts
+│  │  └── 📄 user.entity.ts
+│  ├── 📂 discount
+│  |  ├── 📂 dto
+│  │  |   ├── 📄 discount.dto.ts
+│  │  |   ├── 📄 discountRes.dto.ts
+│  │  ├── 📄 discount.module.ts
+│  │  ├── 📄 discount.repository.ts
+│  │  ├── 📄 discount.service.ts
+│  ├── 📂 exception
+│  |  ├── 📂 dto
+│  │  |   ├── 📄 exceptionDto.dto.ts
+│  │  ├── 📄 exception.module.ts
+│  │  ├── 📄 exception.repository.ts
+│  │  ├── 📄 exception.service.ts
+│  ├── 📂 penalty
+│  |  ├── 📂 dto
+│  │  |   ├── 📄 PenaltyDto.dto.ts
+│  │  ├── 📄 penalty.module.ts
+│  │  ├── 📄 penalty.repository.ts
+│  │  ├── 📄 penalty.service.ts
+│  ├── 📂 rentalPay
+│  |  ├── 📂 dto
+│  │  |   ├── 📄 rentalPayReq.dto.ts
+│  │  ├── 📄 rentalpay.module.ts
+│  │  ├── 📄 rentalpay.controller.ts
+│  │  ├── 📄 area.repository.ts
+│  │  ├── 📄 areaPolicy.repository.ts
+│  │  ├── 📄 rentalpay.service.ts
+│  │  ├── 📄 useKickboardHistory.repository.ts
+│  │  ├── 📄 parkingZone.repository.ts
+│  │  ├── 📄 forbiddenAreaZone.repository.ts
 ├── 📂 global
 │  ├── 📂 common
 │  │  ├── 📄 CommonResponse.ts

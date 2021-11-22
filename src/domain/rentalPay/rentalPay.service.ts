@@ -56,7 +56,7 @@ export class RentalPayService {
 		// 벌금 계산
 		if (penaltyList.length > 0) {
 			pay = await this.calculatorService.calculate(rentalPayReq, penaltyList, pay);
-			
+			return await this.useKickboardHistoryRepository.createOne(user.user_id, rentalPayReq, pay);
 		}
 		// 할인 확인
 		const discountDTO = {

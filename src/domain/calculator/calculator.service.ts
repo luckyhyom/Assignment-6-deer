@@ -19,6 +19,7 @@ export class CalculatorService {
 	async calculate(rentalPayReq, list, pay, history=null, base_payment = null) {
 		pay = Number(pay);
 		const sortedList = list.slice().sort((a, b) => b.code_id - a.code_id);
+		const {use_end_lat, use_end_lng } = rentalPayReq;
 		// discount 일 때만 타고, penalty, exception일 때는 이 if문을 탈 필요가 없음 
 		if (history && DiscountService.isReusing(history)) {
 			pay -= base_payment;
@@ -43,12 +44,7 @@ export class CalculatorService {
 					pay = 0
 					break;
 				case this.calculationType.perDistancePercent:
-					let dist = await this.areaRepository.returnDistance(
-						rentalPayReq.use_end_lat,
-						rentalPayReq.use_end_lng
-					);
-					dist *= 111 / 10; // 100m단위로 변경 1도 -> 111km
-					pay += dist * item.amount;
+					pay += item.amount * await this.measureDistance(use_end_lat,use_end_lng);
 					break;
 				case this.calculationType.perDistancePrice:
 					break;
@@ -59,4 +55,10 @@ export class CalculatorService {
 		return pay;
 	}
 
+	async measureDistance(use_end_lat, use_end_lng) {
+		let distance = await this.areaRepository.returnDistance(use_end_lat, use_end_lng);
+		distance *= 111 / 10; // 100m단위로 변경 1도 -> 111km
+		return distance;
+	}
+	
 }

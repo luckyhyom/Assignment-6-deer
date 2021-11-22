@@ -19,15 +19,19 @@ export class PenaltyService {
 	) {}
 
 	async check(rentalInfo: PenaltyDto): Promise<PenaltyRes[]> {
-		const array = [];
-		const row1 = await this.isOutOfArea(rentalInfo);
-		const row2 = await this.isInForbiddenZone(rentalInfo);
-		if (row1) array.push(row1);
-		if (row2) array.push(row2);
+		const checkList = [
+			await this.isOutOfArea(rentalInfo),
+			await this.isInForbiddenZone(rentalInfo),
+		];				
 
-		const result = array.map( item => {
-			if (item) return new PenaltyRes(item);
+		const filtered = checkList.filter((penalty) => {
+			return penalty !== undefined;
+		})
+
+		const result = filtered.map((penalty) => {
+			return new PenaltyRes(penalty);
 		});
+
 		return result;
 	}
 

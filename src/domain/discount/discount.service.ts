@@ -19,22 +19,23 @@ export class DiscountService {
 	) {}
 
 	async check(rentalPayDto: RentalPayDto): Promise<DiscountResDto[]> {
-		const useHistory =
-			await this.useKickboardHistoryRepository.findLatestOneOfUser(
-				rentalPayDto.user_id
-			);
+		const useHistory = await this.useKickboardHistoryRepository.findLatestOneOfUser(rentalPayDto.user_id);
 
-		const list = [];
-		const row1 =await this.isParking(
-			rentalPayDto.use_end_lat,
-			rentalPayDto.use_end_lng
-		);
-		const row2 = await this.isFirstUsing(useHistory);
-		if (row1) list.push(row1);
-		if (row2) list.push(row2);
-		const result = list.map((item) => {
-			if (item) return new DiscountResDto(item)});
-		return result; // .filter((item) => item.code_id)
+		const checkList = [
+			await this.isParking(rentalPayDto.use_end_lat, rentalPayDto.use_end_lng),
+			await this.isFirstUsing(useHistory),
+		];
+
+		const filtered = checkList.filter((discount) => {
+			return discount !== undefined;
+		})
+
+		const result = filtered.map((discount) => {
+			return new DiscountResDto(discount)
+		});
+
+		// console.log(result);
+		return result;	
 	}
 
 	// 30분 이내 다시 이용시 기본요금 면제

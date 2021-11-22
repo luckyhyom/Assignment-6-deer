@@ -19,10 +19,12 @@ export class DiscountService {
 	) {}
 
 	async check(rentalPayDto: RentalPayDto): Promise<DiscountResDto[]> {
-		const useHistory = await this.useKickboardHistoryRepository.findLatestOneOfUser(rentalPayDto.user_id);
+		const { use_end_lat,use_end_lng, user_id } = rentalPayDto;
+
+		const useHistory = await this.useKickboardHistoryRepository.findLatestOneOfUser(user_id);
 
 		const checkList = [
-			await this.isParking(rentalPayDto.use_end_lat, rentalPayDto.use_end_lng),
+			await this.isParking(use_end_lat, use_end_lng),
 			await this.isFirstUsing(useHistory),
 		];
 
@@ -33,7 +35,7 @@ export class DiscountService {
 		const result = filtered.map((discount) => {
 			return new DiscountResDto(discount)
 		});
-
+		
 		// console.log(result);
 		return result;	
 	}
@@ -50,21 +52,19 @@ export class DiscountService {
 
 	// 파킹존 할인
 	private async isParking(lat, lng) {
-		if (!(await this.parkingZoneRepository.findParkingZone(lat, lng))) {
+		const isParkingZone = await this.parkingZoneRepository.findParkingZone(lat, lng)
+		if (!isParkingZone) {
 			return;
 		}
 
-		return await this.discountRepository.getDiscount(
-			this.discountList.parkingZone
-		);
+		return await this.discountRepository.getDiscount(this.discountList.parkingZone);
 	}
 
 	// 첫 이용
 	private async isFirstUsing(useHistory) {
-		if (!useHistory) {
-			return await this.discountRepository.getDiscount(
-				this.discountList.firstUsing
-			);
+		if(useHistory) {
+			return;
 		}
+		return await this.discountRepository.getDiscount(this.discountList.firstUsing)
 	}
 }

@@ -173,7 +173,7 @@ forbidden_area_coords (반납금지구역의 경계를 표시하는 위도, 경�
 
 ## 🧬 **DB 모델링**
 
-![디어 (4)](https://user-images.githubusercontent.com/60311404/142433452-5023f40d-3662-4149-837f-e1bc504e689c.png)
+![디어 (8)](https://user-images.githubusercontent.com/43634786/142737035-c6bac864-68d1-4960-8df7-3280cb602e57.png)
 
 <br>
 
@@ -243,16 +243,16 @@ forbidden_area_coords (반납금지구역의 경계를 표시하는 위도, 경�
 
 ## ⚡ **작업 컨벤션**
 
-#### - 코딩  컨벤션
+#### - 코딩  컨벤션 :label:
 
 - 파일 / 변수 네이밍 : CamelCase
 - 탭 사이즈 : 4
 
-#### - 깃 컨벤션
+#### - 깃 컨벤션 :triangular_ruler:
 
 <img src="https://user-images.githubusercontent.com/60311404/142437453-bf90553a-1f18-4a31-a560-644c9087f939.png" alt="Untitled (3)" style="zoom:67%;" /> 
 
-#### - 협업
+#### - 협업 :handshake:
 
 - [Gather.town](https://www.gather.town/) 을 통해 화상 회의로 소통을 진행했습니다.
 - Notion 을 이용해 API 명세서와 회의록을 작성했습니다.
@@ -268,7 +268,9 @@ forbidden_area_coords (반납금지구역의 경계를 표시하는 위도, 경�
 
 ### 2) 상세 내용
 
-[데이터베이스 설계](https://github.com/preOnboarding-Team13/Assignment-6-deer/wiki/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%84%A4%EA%B3%84)
+#### 데이터베이스 설계
+
+MySQL Geometry Type 연산 
 
 <br>
 

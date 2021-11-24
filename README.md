@@ -438,4 +438,4 @@ forbidden_area_coords (반납금지구역의 경계를 표시하는 위도, 경�
 
 | 김바다 | 김효민 | 원동균 | 이나영 | 장희진 | 조재복 |
 | ------ | ------ | ------ | ------ | ------ | ------ |
-|        | [티스토리블로그](https://baejjang.tistory.com/10)       |        |        |        |        |
+|        | [티스토리블로그](https://baejjang.tistory.com/10)       |[티스토리 블로그](https://tristy.tistory.com/49)        |        |        |        |
